@@ -5,57 +5,66 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:ui="http://schemas.modernwpf.com/2019"
         xmlns:vm="clr-namespace:Sample.ViewModels"
-        xmlns:control="clr-namespace:Mar.Controls.Control;assembly=Mar.Controls"
+        xmlns:views="clr-namespace:Sample.Views"
         mc:Ignorable="d"
         d:DataContext="{d:DesignInstance vm:MainViewModel, IsDesignTimeCreatable=True}"
-        Title="Mar.Controls Sample" Height="450" Width="450"
-        ui:WindowHelper.UseModernWindowStyle="True">
+        ui:ThemeManager.IsThemeAware="True"
+        ui:WindowHelper.UseModernWindowStyle="True"
+        Title="Mar.Controls Sample" Height="720" Width="1080">
+    <Window.Resources>
+        <!-- Opening -->
+        <Storyboard x:Key="OpenMenu">
+            <ThicknessAnimation Storyboard.TargetProperty="Margin" From="0,0,-400,0" To="0,0,0,0"
+                                DecelerationRatio="0.9" Duration="0:0:0.5" />
+        </Storyboard>
+        <!-- Closing -->
+        <Storyboard x:Key="CloseMenu">
+            <ThicknessAnimation Storyboard.TargetProperty="Margin" From="0,0,0,0" To="0,0,-400,0"
+                                DecelerationRatio="0.9" Duration="0:0:0.5" />
+        </Storyboard>
+    </Window.Resources>
     <Grid>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="Auto" />
-            <RowDefinition Height="*" />
-        </Grid.RowDefinitions>
-        <!-- 命令栏 -->
-        <Grid Grid.Row="0">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition />
-                <ColumnDefinition Width="Auto" />
-            </Grid.ColumnDefinitions>
-
-            <Menu Grid.Column="0">
-                <MenuItem Header="Theme" />
-            </Menu>
-
-            <ui:CommandBar
-                Margin="0,0,12,0"
-                Background="Transparent"
-                DefaultLabelPosition="Right"
-                Grid.Column="1">
-                <ui:AppBarButton Click="OnThemeButtonClick" Label="Toggle Theme">
-                    <ui:AppBarButton.Icon>
-                        <ui:FontIcon Glyph="&#xE790;" Margin="0,-2,0,0" />
-                    </ui:AppBarButton.Icon>
-                </ui:AppBarButton>
-            </ui:CommandBar>
-        </Grid>
+        <views:SidePanelRight x:Name="RightMenu" Width="420"
+                              MouseDown="Window_MouseDown"
+                              HorizontalAlignment="Right"
+                              Margin="0,0,-420,0"
+                              Panel.ZIndex="2" />
         
-        <!-- Content -->
-        <Grid Grid.Row="1">
+        <Grid>
             <Grid.RowDefinitions>
-                <RowDefinition Height="50*"/>
-                <RowDefinition Height="10*"/>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="*" />
             </Grid.RowDefinitions>
-            <UniformGrid Columns="2" Grid.Row="0">
-                <control:CircularProgressBar Value="{Binding Percent}" x:Name="ProcessBar0"/>
-                <control:CircularProgressBar Value="{Binding Percent}"/>
-                <control:CircularProgressBar Value="{Binding Percent}" />
-                <control:CircularProgressBar Value="{Binding Percent}" />
-            </UniformGrid>
-            <WrapPanel HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Row="1">
-                <Button Content="开始" Command="{Binding CommandStart}"/>
-                <TextBlock Text="{Binding Value, ElementName=ProcessBar0}" VerticalAlignment="Center"/>
-            </WrapPanel>
-        </Grid>
+            
+            <!-- 命令栏 -->
+            <Grid Grid.Row="0">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition />
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="Auto" />
+                </Grid.ColumnDefinitions>
 
+                <Menu Grid.Column="0">
+                    <MenuItem Header="Theme" />
+                </Menu>
+                
+                <Button Content="别点我" Click="BtnTest_OnClick" Grid.Column="1"/>
+
+                <ui:CommandBar
+                    Margin="0,0,12,0"
+                    Background="Transparent"
+                    DefaultLabelPosition="Right"
+                    Grid.Column="2">
+                    <ui:AppBarButton Click="OnThemeButtonClick" Label="Toggle Theme">
+                        <ui:AppBarButton.Icon>
+                            <ui:FontIcon Glyph="&#xE790;" Margin="0,-2,0,0" />
+                        </ui:AppBarButton.Icon>
+                    </ui:AppBarButton>
+                </ui:CommandBar>
+            </Grid>
+            
+            <!-- Content -->
+            <views:MainContent Grid.Row="1" />
+        </Grid>
     </Grid>
 </Window>

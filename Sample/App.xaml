@@ -2,15 +2,47 @@
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:ui="http://schemas.modernwpf.com/2019"
+             xmlns:presets="clr-namespace:Sample.Presets"
+             xmlns:local="clr-namespace:Sample"
              StartupUri="Views/MainWindow.xaml">
     <Application.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
-                <ui:ThemeResources />
+                <ui:ThemeResources CanBeAccessedAcrossThreads="{x:Static local:App.IsMultiThreaded}">
+                    <ui:ThemeResources.ThemeDictionaries>
+                        <ResourceDictionary x:Key="Light" ui:ThemeDictionary.Key="Light">
+                            <ResourceDictionary.MergedDictionaries>
+                                <presets:ColorPresetResources TargetTheme="Light" />
+                                <presets:ShapePresetResources />
+                            </ResourceDictionary.MergedDictionaries>
+                            <SolidColorBrush x:Key="AppBackgroundBrush" Color="#FFF1F1F1" />
+                            <SolidColorBrush x:Key="AppContentBackgroundBrush" Color="{ui:StaticColor SystemAltHighColor}" />
+                            <SolidColorBrush x:Key="CustomThemeBrush" Color="Red" />
+                        </ResourceDictionary>
+
+                        <ResourceDictionary x:Key="Dark" ui:ThemeDictionary.Key="Dark">
+                            <ResourceDictionary.MergedDictionaries>
+                                <presets:ColorPresetResources TargetTheme="Dark" />
+                                <presets:ShapePresetResources />
+                            </ResourceDictionary.MergedDictionaries>
+                            <SolidColorBrush x:Key="AppBackgroundBrush" Color="#FF232323" />
+                            <SolidColorBrush x:Key="AppContentBackgroundBrush" Color="#FF282828" />
+                            <SolidColorBrush x:Key="CustomThemeBrush" Color="Yellow" />
+                        </ResourceDictionary>
+
+                        <ResourceDictionary x:Key="HighContrast" ui:ThemeDictionary.Key="HighContrast">
+                            <ResourceDictionary.MergedDictionaries>
+                                <ResourceDictionary Source="Styles/HighContrast.xaml" />
+                            </ResourceDictionary.MergedDictionaries>
+                        </ResourceDictionary>
+                    </ui:ThemeResources.ThemeDictionaries>
+                </ui:ThemeResources>
                 <ui:XamlControlsResources />
+                
                 <!-- Other merged dictionaries here -->
             </ResourceDictionary.MergedDictionaries>
             <!-- Other app resources here -->
+            <Thickness x:Key="ControlPageContentMargin">24,24,24,20</Thickness>
         </ResourceDictionary>
     </Application.Resources>
 </Application>

@@ -1,4 +1,6 @@
 ﻿using System.Windows;
+using System.Windows.Input;
+using System.Windows.Media.Animation;
 using ModernWpf;
 using Sample.Helper;
 using Sample.ViewModels;
@@ -14,6 +16,18 @@ public partial class MainWindow : Window
     {
         InitializeComponent();
         DataContext = MainViewModel.CreateInstance();
+    }
+
+    private void Window_MouseDown(object sender, MouseButtonEventArgs e)
+    {
+        var sb = Resources["CloseMenu"] as Storyboard;
+        sb?.Begin(RightMenu);
+    }
+
+    private void BtnTest_OnClick(object sender, RoutedEventArgs e)
+    {
+        var sb = Resources["OpenMenu"] as Storyboard;
+        sb?.Begin(RightMenu);
     }
 
     private void OnThemeButtonClick(object sender, RoutedEventArgs e)

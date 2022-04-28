@@ -1,0 +1,56 @@
+﻿<UserControl x:Class="Sample.Views.SidePanelRight"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:ui="http://schemas.modernwpf.com/2019"
+             xmlns:system="clr-namespace:System;assembly=System.Runtime"
+             xmlns:common="clr-namespace:Sample.Common"
+             xmlns:presets="clr-namespace:Sample.Presets"
+             xmlns:control="clr-namespace:Sample.Control"
+             xmlns:viewModels="clr-namespace:Sample.ViewModels"
+             mc:Ignorable="d"
+             d:DataContext="{d:DesignInstance viewModels:MainViewModel, IsDesignTimeCreatable=True}"
+             Background="{DynamicResource SystemControlBackgroundAltMediumHighBrush}">
+    <UserControl.Resources>
+        <system:Double x:Key="ItemWidth">280</system:Double>
+        <common:AppThemeConverter x:Key="AppThemeConverter" />
+    </UserControl.Resources>
+
+    <ScrollViewer>
+        <ui:SimpleStackPanel
+            Spacing="24"
+            Margin="{StaticResource ControlPageContentMargin}">
+
+            <ui:RadioButtons
+                ui:ControlHelper.Header="Theme Mode"
+                SelectedItem="{Binding Source={x:Static common:ThemeManagerProxy.Current}, Path=ApplicationTheme, Converter={StaticResource AppThemeConverter}}">
+                <ui:RadioButtons.ItemsSource>
+                    <common:AppThemes />
+                </ui:RadioButtons.ItemsSource>
+            </ui:RadioButtons>
+
+            <ComboBox
+                x:Name="ColorPresetsComboBox"
+                MinWidth="{StaticResource ItemWidth}"
+                ui:ControlHelper.Header="Color Presets"
+                SelectedItem="{Binding ColorPreset, Source={x:Static presets:PresetManager.Current}}">
+                <system:String>Default</system:String>
+                <system:String>Forest</system:String>
+                <system:String>Lavender</system:String>
+                <system:String>Nighttime</system:String>
+            </ComboBox>
+
+            <ComboBox
+                x:Name="ShapePresetsComboBox"
+                MinWidth="{StaticResource ItemWidth}"
+                ui:ControlHelper.Header="Shape Presets"
+                DisplayMemberPath="DisplayName"
+                SelectedValuePath="Value"
+                SelectedValue="{Binding ShapePreset, Source={x:Static presets:PresetManager.Current}}" />
+
+            <control:AccentColorPicker x:Name="AccentColorPicker" />
+
+        </ui:SimpleStackPanel>
+    </ScrollViewer>
+</UserControl>
