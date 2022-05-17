@@ -31,7 +31,7 @@ public class ThemeManagerProxy : BindableBase
         });
     }
 
-    private static readonly AppConfig Config = AppConfig.CreateInstance();
+    private readonly AppConfig _config = AppConfig.CreateInstance();
     public static ThemeManagerProxy Current { get; } = new ThemeManagerProxy();
 
     #region ApplicationTheme
@@ -40,7 +40,7 @@ public class ThemeManagerProxy : BindableBase
     {
         get
         {
-            var theme = Config.GetValue("AppTheme");
+            var theme = _config.GetValue(Section.Theme, "AppTheme");
             _applicationTheme = theme switch
             {
                 "Dark" => ModernWpf.ApplicationTheme.Dark,
@@ -63,11 +63,11 @@ public class ThemeManagerProxy : BindableBase
             var theme = ThemeManager.Current.ApplicationTheme;
             if (null == theme)
             {
-                Config.SetValue("AppTheme", "");
+                _config.SetValue(Section.Theme, "AppTheme", "");
                 return;
             }
 
-            Config.SetValue("AppTheme", theme.ToString());
+            _config.SetValue(Section.Theme, "AppTheme", theme.ToString());
         }
     }
 
@@ -109,7 +109,7 @@ public class ThemeManagerProxy : BindableBase
     {
         get
         {
-            var accent = Config.GetValue("AccentColor");
+            var accent = _config.GetValue(Section.Theme, "AccentColor");
             if (!string.IsNullOrEmpty(accent) && accent.StartsWith("#"))
             {
                 _accentColor = (Color)ColorConverter.ConvertFromString(accent)!;
@@ -117,7 +117,7 @@ public class ThemeManagerProxy : BindableBase
             else
             {
                 _accentColor = null;
-                Config.SetValue("AccentColor", "");
+                _config.SetValue(Section.Theme, "AccentColor", "");
             }
 
             return _accentColor;
@@ -129,11 +129,11 @@ public class ThemeManagerProxy : BindableBase
                 // 存入配置文件
                 if (null != value)
                 {
-                    Config.SetValue("AccentColor", value.ToString());
+                    _config.SetValue(Section.Theme, "AccentColor", value.ToString());
                 }
                 else
                 {
-                    Config.SetValue("AccentColor", "");
+                    _config.SetValue(Section.Theme, "AccentColor", "");
                 }
 
                 Set(ref _accentColor, value);

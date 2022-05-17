@@ -7,8 +7,8 @@ namespace Sample.ViewModels;
 
 public class MainViewModel : ObservableObject
 {
-    private int _mPercent = 0;
-    private DispatcherTimer _mTimer = new();
+    private int _mPercent;
+    private readonly DispatcherTimer _mTimer = new();
 
     private static MainViewModel _instance;
 
@@ -67,7 +67,7 @@ public class MainViewModel : ObservableObject
         }
     }
 
-    private bool _isBusy = false;
+    private bool _isBusy;
 
     private bool IsBusy
     {

@@ -6,7 +6,7 @@ namespace Sample.Presets;
 
 public class PresetManager : BindableBase
 {
-    private static readonly AppConfig Config = AppConfig.CreateInstance();
+    private readonly AppConfig _config = AppConfig.CreateInstance();
 
     internal const string DefaultPreset = "Default";
 
@@ -22,11 +22,11 @@ public class PresetManager : BindableBase
     {
         get
         {
-            var color = Config.GetValue("ColorPreset");
-            if (color != "Forest" & color != "Lavender" & color != "Nighttime")
+            var color = _config.GetValue(Section.Theme, "ColorPreset");
+            if (color != "Forest" & color != "Lavender" & color != "Nighttime" & color != DefaultPreset)
             {
                 color = DefaultPreset;
-                Config.SetValue("ColorPreset", DefaultPreset);
+                _config.SetValue(Section.Theme, "ColorPreset", DefaultPreset);
             }
 
             if (!string.IsNullOrEmpty(color)) _colorPreset = color;
@@ -38,7 +38,7 @@ public class PresetManager : BindableBase
             {
                 _colorPreset = value;
                 // 存入配置文件
-                Config.SetValue("ColorPreset", _colorPreset);
+                _config.SetValue(Section.Theme, "ColorPreset", _colorPreset);
                 RaisePropertyChanged();
                 ColorPresetChanged?.Invoke(this, EventArgs.Empty);
             }
@@ -51,11 +51,11 @@ public class PresetManager : BindableBase
     {
         get
         {
-            var shape = Config.GetValue("ShapePreset");
-            if (shape != "PreFluent")
+            var shape = _config.GetValue(Section.Theme, "ShapePreset");
+            if (shape != "PreFluent" & shape != DefaultPreset)
             {
                 shape = DefaultPreset;
-                Config.SetValue("ShapePreset", DefaultPreset);
+                _config.SetValue(Section.Theme, "ShapePreset", DefaultPreset);
             }
 
             if (!string.IsNullOrEmpty(shape)) _shapePreset = shape;
@@ -67,7 +67,7 @@ public class PresetManager : BindableBase
             {
                 _shapePreset = value;
                 // 存入配置文件
-                Config.SetValue("ShapePreset", _shapePreset);
+                _config.SetValue(Section.Theme, "ShapePreset", _shapePreset);
                 RaisePropertyChanged();
                 ShapePresetChanged?.Invoke(this, EventArgs.Empty);
             }

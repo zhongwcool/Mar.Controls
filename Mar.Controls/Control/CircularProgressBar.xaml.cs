@@ -40,7 +40,7 @@ public partial class CircularProgressBar
         set => SetValue(MagicStrokeProperty, value);
     }
 
-    public static readonly DependencyProperty MagicStrokeProperty = DependencyProperty.Register(
+    private static readonly DependencyProperty MagicStrokeProperty = DependencyProperty.Register(
         nameof(MagicStroke),
         typeof(Brush),
         typeof(CircularProgressBar),
@@ -63,17 +63,17 @@ public partial class CircularProgressBar
         }
     }
 
-    public static readonly DependencyProperty ValueProperty = DependencyProperty.Register(
+    private static readonly DependencyProperty ValueProperty = DependencyProperty.Register(
         nameof(Value),
         typeof(int),
         typeof(CircularProgressBar),
         new PropertyMetadata(-1, OnPropertyChanged));
 
-    private static void OnPropertyChanged(DependencyObject obj, DependencyPropertyChangedEventArgs args)
+    private static void OnPropertyChanged(DependencyObject sender, DependencyPropertyChangedEventArgs args)
     {
         if (args.Property == ValueProperty)
         {
-            var bar = obj as CircularProgressBar;
+            var bar = sender as CircularProgressBar;
             if (bar?.Value != null)
             {
                 bar.DrawValue(bar.Value);
