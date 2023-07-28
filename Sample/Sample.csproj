@@ -4,8 +4,8 @@
         <OutputType>WinExe</OutputType>
         <Nullable>disable</Nullable>
         <UseWPF>true</UseWPF>
-        <TargetFramework>net6.0-windows10.0.18362.0</TargetFramework>
-        <LangVersion>10</LangVersion>
+        <TargetFramework>net7.0-windows</TargetFramework>
+        <LangVersion>11</LangVersion>
     </PropertyGroup>
 
     <ItemGroup>

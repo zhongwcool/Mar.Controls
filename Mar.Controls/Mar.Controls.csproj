@@ -5,20 +5,22 @@
         <GenerateDocumentationFile>true</GenerateDocumentationFile>
         <ImplicitUsings>enable</ImplicitUsings>
         <Nullable>enable</Nullable>
-        <LangVersion>10</LangVersion>
-        <PackageVersion>0.1.0</PackageVersion>
-        <Title>Some simple but useful usercontrol for WPF.</Title>
+        <LangVersion>11</LangVersion>
+        <PackageVersion>0.2.0</PackageVersion>
+        <Title>Some useful usercontrol for WPF.</Title>
         <Authors>Zhong Wei</Authors>
-        <Description>Some simple but useful usercontrol for WPF.</Description>
+        <Description>Some useful usercontrol for WPF.</Description>
         <RepositoryUrl>https://github.com/zhongwcool/Mar.Controls.git</RepositoryUrl>
         <PackageLicenseFile>LICENSE</PackageLicenseFile>
-        <PackageReleaseNotes>1. Add CircularProgressBar</PackageReleaseNotes>
+        <PackageReleaseNotes>See https://github.com/zhongwcool/Mar.Controls.git</PackageReleaseNotes>
+        <PackageReadmeFile>README.md</PackageReadmeFile>
         <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
-        <TargetFrameworks>net461;net472;net48;net5.0-windows10.0.18362.0</TargetFrameworks>
+        <TargetFrameworks>net472;net6.0-windows;net7.0-windows;net481</TargetFrameworks>
     </PropertyGroup>
-    
+
     <ItemGroup>
         <None Include="LICENSE" Pack="true" PackagePath=""/>
+        <None Include="README.md" Pack="true" PackagePath=""/>
     </ItemGroup>
 
     <ItemGroup>
