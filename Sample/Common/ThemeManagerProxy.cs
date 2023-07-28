@@ -1,12 +1,13 @@
 ﻿using System.ComponentModel;
 using System.Windows.Media;
+using CommunityToolkit.Mvvm.ComponentModel;
 using ModernWpf;
 using Sample.Data;
 using Sample.Helper;
 
 namespace Sample.Common;
 
-public class ThemeManagerProxy : BindableBase
+public class ThemeManagerProxy : ObservableObject
 {
     private ThemeManagerProxy()
     {
@@ -52,7 +53,7 @@ public class ThemeManagerProxy : BindableBase
         }
         set
         {
-            Set(ref _applicationTheme, value);
+            SetProperty(ref _applicationTheme, value);
 
             if (!_updatingApplicationTheme)
             {
@@ -88,7 +89,7 @@ public class ThemeManagerProxy : BindableBase
     public ApplicationTheme ActualApplicationTheme
     {
         get => _actualApplicationTheme;
-        private set => Set(ref _actualApplicationTheme, value);
+        private set => SetProperty(ref _actualApplicationTheme, value);
     }
 
     private void UpdateActualApplicationTheme()
@@ -136,7 +137,7 @@ public class ThemeManagerProxy : BindableBase
                     _config.SetValue(Section.Theme, "AccentColor", "");
                 }
 
-                Set(ref _accentColor, value);
+                SetProperty(ref _accentColor, value);
 
                 if (!_updatingAccentColor)
                 {
@@ -160,7 +161,7 @@ public class ThemeManagerProxy : BindableBase
     public Color ActualAccentColor
     {
         get => _actualAccentColor;
-        private set => Set(ref _actualAccentColor, value);
+        private set => SetProperty(ref _actualAccentColor, value);
     }
 
     private void UpdateActualAccentColor()

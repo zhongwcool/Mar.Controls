@@ -1,10 +1,10 @@
 ﻿using System;
-using Sample.Common;
+using CommunityToolkit.Mvvm.ComponentModel;
 using Sample.Data;
 
 namespace Sample.Presets;
 
-public class PresetManager : BindableBase
+public class PresetManager : ObservableObject
 {
     private readonly AppConfig _config = AppConfig.CreateInstance();
 
@@ -34,14 +34,10 @@ public class PresetManager : BindableBase
         }
         set
         {
-            if (_colorPreset != value)
-            {
-                _colorPreset = value;
-                // 存入配置文件
-                _config.SetValue(Section.Theme, "ColorPreset", _colorPreset);
-                RaisePropertyChanged();
-                ColorPresetChanged?.Invoke(this, EventArgs.Empty);
-            }
+            if (!SetProperty(ref _colorPreset, value)) return;
+            // 存入配置文件
+            _config.SetValue(Section.Theme, "ColorPreset", _colorPreset);
+            ColorPresetChanged?.Invoke(this, EventArgs.Empty);
         }
     }
 
@@ -63,14 +59,10 @@ public class PresetManager : BindableBase
         }
         set
         {
-            if (_shapePreset != value)
-            {
-                _shapePreset = value;
-                // 存入配置文件
-                _config.SetValue(Section.Theme, "ShapePreset", _shapePreset);
-                RaisePropertyChanged();
-                ShapePresetChanged?.Invoke(this, EventArgs.Empty);
-            }
+            if (!SetProperty(ref _shapePreset, value)) return;
+            // 存入配置文件
+            _config.SetValue(Section.Theme, "ShapePreset", _shapePreset);
+            ShapePresetChanged?.Invoke(this, EventArgs.Empty);
         }
     }
 

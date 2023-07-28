@@ -2,13 +2,13 @@
 
 public class ShapePreset
 {
-    public ShapePreset(string value, string displayName)
+    public ShapePreset(string value, string name)
     {
         Value = value;
-        DisplayName = displayName;
+        Name = name;
     }
 
     public string Value { get; }
 
-    public string DisplayName { get; }
+    public string Name { get; }
 }

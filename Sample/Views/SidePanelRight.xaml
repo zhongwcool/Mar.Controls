@@ -45,7 +45,7 @@
                 x:Name="ShapePresetsComboBox"
                 MinWidth="{StaticResource ItemWidth}"
                 ui:ControlHelper.Header="Shape Presets"
-                DisplayMemberPath="DisplayName"
+                DisplayMemberPath="Name"
                 SelectedValuePath="Value"
                 SelectedValue="{Binding ShapePreset, Source={x:Static presets:PresetManager.Current}}" />
 
