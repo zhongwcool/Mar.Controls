@@ -8,4 +8,4 @@
 
 ### 效果演示
 
-![](https://raw.githubusercontent.com/zhongwcool/Mar.Controls/main/Sample/Assets/sf9QtpmJUj.gif)
+![](https://raw.githubusercontent.com/zhongwcool/Mar.Controls/main/Assets/sf9QtpmJUj.gif)
