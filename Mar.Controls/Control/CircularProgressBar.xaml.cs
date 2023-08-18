@@ -5,10 +5,16 @@ using ModernWpf;
 
 namespace Mar.Controls.Control;
 
+/// <summary>
+///     Display a circular progress bar with a percentage
+/// </summary>
 public partial class CircularProgressBar
 {
     private readonly Color _initBrush;
 
+    /// <summary>
+    ///     Display a circular progress bar with a percentage
+    /// </summary>
     public CircularProgressBar()
     {
         InitializeComponent();

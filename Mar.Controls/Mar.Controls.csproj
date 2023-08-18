@@ -6,7 +6,7 @@
         <ImplicitUsings>enable</ImplicitUsings>
         <Nullable>enable</Nullable>
         <LangVersion>11</LangVersion>
-        <PackageVersion>0.2.0</PackageVersion>
+        <PackageVersion>0.2.1</PackageVersion>
         <Title>Some useful usercontrol for WPF.</Title>
         <Authors>Zhong Wei</Authors>
         <Description>Some useful usercontrol for WPF.</Description>
@@ -21,6 +21,7 @@
     <ItemGroup>
         <None Include="LICENSE" Pack="true" PackagePath=""/>
         <None Include="README.md" Pack="true" PackagePath=""/>
+        <None Include="README.txt" Pack="true" PackagePath=""/>
     </ItemGroup>
 
     <ItemGroup>
