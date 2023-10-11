@@ -2,7 +2,7 @@
 using System.Windows;
 using System.Windows.Input;
 using System.Windows.Media.Animation;
-using Mar.Controls.Debug;
+using Mar.Controls.Tool;
 using ModernWpf;
 using Sample.Helper;
 using Sample.ViewModels;

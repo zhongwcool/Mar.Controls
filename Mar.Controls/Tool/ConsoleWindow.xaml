@@ -1,0 +1,16 @@
+﻿<Window x:Class="Mar.Controls.Tool.ConsoleWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        mc:Ignorable="d"
+        Icon="../Resources/console.ico"
+        Title="调试窗口" Height="450" Width="800">
+    <Grid PreviewMouseMove="UIElement_OnPreviewMouseMove" Background="#333333">
+        <ScrollViewer x:Name="ScrollViewer" VerticalScrollBarVisibility="Auto">
+            <TextBox x:Name="BlockConsole" Style="{x:Null}" IsReadOnly="True"
+                     FontFamily="Lucida Console" MaxLength="1000"
+                     Background="Transparent" Foreground="White" />
+        </ScrollViewer>
+    </Grid>
+</Window>
