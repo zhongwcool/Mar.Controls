@@ -6,7 +6,7 @@
         <ImplicitUsings>enable</ImplicitUsings>
         <Nullable>enable</Nullable>
         <LangVersion>11</LangVersion>
-        <PackageVersion>0.2.1</PackageVersion>
+        <PackageVersion>0.3.0</PackageVersion>
         <Title>Some useful usercontrol for WPF.</Title>
         <Authors>Zhong Wei</Authors>
         <Description>Some useful usercontrol for WPF.</Description>
@@ -26,6 +26,11 @@
 
     <ItemGroup>
         <PackageReference Include="ModernWpfUI" Version="0.9.6"/>
+    </ItemGroup>
+
+    <ItemGroup>
+        <None Remove="Resources\console.ico"/>
+        <Resource Include="Resources\console.ico"/>
     </ItemGroup>
 
 </Project>

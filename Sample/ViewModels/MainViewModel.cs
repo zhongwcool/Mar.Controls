@@ -2,6 +2,7 @@
 using System.Windows.Threading;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
+using Serilog;
 
 namespace Sample.ViewModels;
 
@@ -25,6 +26,7 @@ public class MainViewModel : ObservableObject
 
         CommandStart = new RelayCommand(() =>
         {
+            Log.Debug("开始演示");
             _mPercent = 0;
             if (IsBusy)
             {
@@ -46,6 +48,7 @@ public class MainViewModel : ObservableObject
         if (_mPercent > 100)
         {
             _mPercent = 100;
+            Log.Debug("演示完成");
             _mTimer.Stop();
             IsBusy = false;
             // reset dispatcher timer

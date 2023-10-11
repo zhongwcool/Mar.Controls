@@ -1,17 +1,17 @@
-﻿using System.Windows;
+﻿using System.IO;
+using System.Windows;
 using System.Windows.Media;
 using ModernWpf;
 using Sample.Data;
 using Sample.Helper;
+using Serilog;
 
 namespace Sample;
 
-/// <summary>
-/// Interaction logic for App.xaml
-/// </summary>
 public partial class App : Application
 {
     private readonly AppConfig _config = AppConfig.CreateInstance();
+    private readonly string _file = Path.Combine("Log", "log.txt");
 
     protected override void OnStartup(StartupEventArgs e)
     {
@@ -22,8 +22,8 @@ public partial class App : Application
             var theme = _config.GetValue(Section.Theme, "AppTheme");
             ThemeManager.Current.ApplicationTheme = theme switch
             {
-                "Dark" => ModernWpf.ApplicationTheme.Dark,
-                "Light" => ModernWpf.ApplicationTheme.Light,
+                "Dark" => ApplicationTheme.Dark,
+                "Light" => ApplicationTheme.Light,
                 _ => null
             };
 
@@ -38,6 +38,17 @@ public partial class App : Application
                 _config.SetValue(Section.Theme, "AccentColor", "");
             }
         });
+
+        Log.Logger = new LoggerConfiguration()
+            .MinimumLevel.Debug()
+            .WriteTo.Debug(outputTemplate: "{Timestamp:HH:mm:ss.fff} [{Level:u3}] {Message:l}{NewLine}{Exception}")
+            .WriteTo.Console(outputTemplate: "{Timestamp:HH:mm:ss.fff} [{Level:u3}] {Message:l}{NewLine}{Exception}")
+            .WriteTo.File(_file,
+                rollingInterval: RollingInterval.Day,
+                rollOnFileSizeLimit: true,
+                outputTemplate: "{Timestamp:HH:mm:ss.fff} [{Level:u3}] {Message:l}{NewLine}{Exception}")
+            .CreateLogger();
+        Log.Debug("hello serilog");
     }
 
     public static bool IsMultiThreaded { get; } = false;
