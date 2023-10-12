@@ -19,6 +19,14 @@ public partial class ConsoleWindow : Window
         Console.SetOut(customWriter);
     }
 
+    public ConsoleWindow()
+    {
+        InitializeComponent();
+
+        var customWriter = new T2TextWriter(BlockConsole); // 替换为你的界面控件
+        Console.SetOut(customWriter);
+    }
+
     private void Owner_WindowClosed(object sender, EventArgs e)
     {
         Close();
