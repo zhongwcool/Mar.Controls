@@ -4,7 +4,7 @@ using System.Windows.Controls;
 
 namespace Mar.Controls.Tool;
 
-public class T2TextWriter : TextWriter
+internal class T2TextWriter : TextWriter
 {
     private readonly TextBox _outputTextBox; // 替换为你的界面控件
 

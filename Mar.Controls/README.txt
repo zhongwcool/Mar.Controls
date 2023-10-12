@@ -17,7 +17,7 @@ Don't forget to add a percent value resources in ViewModel:
     
 ### ConsoleWindow   
  
-Don't forget to config Serilog in App.cs:
+Don't forget to configure Serilog in App.cs:
 
     Log.Logger = new LoggerConfiguration()
                 .MinimumLevel.Debug()

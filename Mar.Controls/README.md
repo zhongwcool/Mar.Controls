@@ -24,7 +24,7 @@ Don't forget to add a percent value resources in ViewModel:
 
 将调试信息输出到窗口中，方便调试。
 
-![](https://raw.githubusercontent.com/zhongwcool/Mar.Controls/main/Assets/20231011_180350.gif)
+![](https://raw.githubusercontent.com/zhongwcool/Mar.Controls/main/Assets/imf5dl4qxE.gif)
 
 Don't forget to config Serilog in App.cs:
 

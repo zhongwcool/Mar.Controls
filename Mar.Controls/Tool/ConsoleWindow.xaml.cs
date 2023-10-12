@@ -6,6 +6,10 @@ namespace Mar.Controls.Tool;
 
 public partial class ConsoleWindow : Window
 {
+    /// <summary>
+    ///     Console Window
+    ///     <para>控制台窗口</para>
+    /// </summary>
     public ConsoleWindow()
     {
         InitializeComponent();
@@ -13,6 +17,7 @@ public partial class ConsoleWindow : Window
         Console.SetOut(customWriter);
     }
 
+    /// <inheritdoc cref="Window.OnContentRendered" />
     protected override void OnContentRendered(EventArgs e)
     {
         base.OnContentRendered(e);
