@@ -1,7 +1,5 @@
-﻿using System.ComponentModel;
-using System.Windows;
+﻿using System.Windows;
 using System.Windows.Media;
-using ModernWpf;
 
 namespace Mar.Controls.Control;
 
@@ -10,30 +8,13 @@ namespace Mar.Controls.Control;
 /// </summary>
 public partial class CircularProgressBar
 {
-    private readonly Color _initBrush;
-
     /// <summary>
     ///     Display a circular progress bar with a percentage
     /// </summary>
     public CircularProgressBar()
     {
         InitializeComponent();
-
-        DependencyPropertyDescriptor.FromProperty(ThemeManager.ActualAccentColorProperty, typeof(ThemeManager))
-            .AddValueChanged(ThemeManager.Current, delegate { UpdateActualAccentColor(); });
-
-        _initBrush = ThemeManager.Current.ActualAccentColor;
     }
-
-    #region UpdateActualAccentColor
-
-    private void UpdateActualAccentColor()
-    {
-        if (_initBrush != ((SolidColorBrush)MagicStroke).Color) return;
-        PART_Bar.Stroke = new SolidColorBrush(ThemeManager.Current.ActualAccentColor);
-    }
-
-    #endregion
 
     #region MagicStroke
 
@@ -50,7 +31,7 @@ public partial class CircularProgressBar
         nameof(MagicStroke),
         typeof(Brush),
         typeof(CircularProgressBar),
-        new PropertyMetadata(new SolidColorBrush(ThemeManager.Current.ActualAccentColor)));
+        new PropertyMetadata(new SolidColorBrush(Colors.Black)));
 
     #endregion
 

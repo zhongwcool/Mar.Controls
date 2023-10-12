@@ -1,10 +1,10 @@
 # Mar.Controls
 
-![](https://raw.githubusercontent.com/zhongwcool/Mar.Controls/main/Assets/sf9QtpmJUj.gif)
-
 Thanks for installing the Mar.Controls NuGet package!
 
-### CircularProgressBar
+### 1. CircularProgressBar
+
+![](https://raw.githubusercontent.com/zhongwcool/Mar.Controls/main/Assets/sf9QtpmJUj.gif)
 
 Don't forget to add a percent value resources in ViewModel:
 
@@ -15,10 +15,24 @@ Don't forget to add a percent value resources in ViewModel:
     </Grid>
     
     
-### ConsoleWindow   
+### 2. ConsoleWindow
+
+![](https://raw.githubusercontent.com/zhongwcool/Mar.Controls/main/Assets/imf5dl4qxE.gif)
+
+You should reference the following packages in your project:
+
+    <ItemGroup>
+        ...
+        <PackageReference Include="Serilog" Version="3.0.1"/>
+        <PackageReference Include="Serilog.Sinks.Console" Version="4.1.0"/>
+        <PackageReference Include="Serilog.Sinks.Debug" Version="2.0.0"/>
+        <PackageReference Include="Serilog.Sinks.File" Version="5.0.0"/>
+    </ItemGroup>
  
 Don't forget to configure Serilog in App.cs:
 
+    private readonly string _file = Path.Combine("Log", "log.txt");
+    
     Log.Logger = new LoggerConfiguration()
                 .MinimumLevel.Debug()
                 .WriteTo.Debug(outputTemplate: "{Timestamp:HH:mm:ss.fff} [{Level:u3}] {Message:l}{NewLine}{Exception}")
