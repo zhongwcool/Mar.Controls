@@ -24,6 +24,13 @@ public partial class ConsoleWindow : Window
         PrintSystemInfo();
     }
 
+    private void UIElement_OnPreviewMouseMove(object sender, MouseEventArgs e)
+    {
+        ScrollViewer.ScrollToBottom();
+    }
+
+    #region Running Environment
+
     private static void PrintSystemInfo()
     {
         Console.WriteLine($"Windows Version: {Environment.OSVersion}");
@@ -60,8 +67,5 @@ public partial class ConsoleWindow : Window
         Console.WriteLine();
     }
 
-    private void UIElement_OnPreviewMouseMove(object sender, MouseEventArgs e)
-    {
-        ScrollViewer.ScrollToBottom();
-    }
+    #endregion
 }

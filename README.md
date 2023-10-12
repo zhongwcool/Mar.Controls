@@ -6,6 +6,36 @@
 
 ## 演示各种控件效果
 
-### 效果演示
+### 1. 环形进度
 
-![](./Assets/sf9QtpmJUj.gif)
+![](https://raw.githubusercontent.com/zhongwcool/Mar.Controls/main/Assets/sf9QtpmJUj.gif)
+
+Don't forget to add a percent value resources in ViewModel:
+
+```xaml
+    <Grid>
+        ...
+        <mar:CircularProgressBar Value="{Binding Percent}" />
+        ...
+    </Grid>
+```
+
+### 2. 调试窗口
+
+将调试信息输出到窗口中，方便调试。
+
+![](https://raw.githubusercontent.com/zhongwcool/Mar.Controls/main/Assets/imf5dl4qxE.gif)
+
+Don't forget to config Serilog in App.cs:
+
+```csharp
+Log.Logger = new LoggerConfiguration()
+                .MinimumLevel.Debug()
+                .WriteTo.Debug(outputTemplate: "{Timestamp:HH:mm:ss.fff} [{Level:u3}] {Message:l}{NewLine}{Exception}")
+                .WriteTo.Console(outputTemplate: "{Timestamp:HH:mm:ss.fff} [{Level:u3}] {Message:l}{NewLine}{Exception}")
+                .WriteTo.File(_file,
+                    rollingInterval: RollingInterval.Day,
+                    rollOnFileSizeLimit: true,
+                    outputTemplate: "{Timestamp:HH:mm:ss.fff} [{Level:u3}] {Message:l}{NewLine}{Exception}")
+                .CreateLogger();
+```
