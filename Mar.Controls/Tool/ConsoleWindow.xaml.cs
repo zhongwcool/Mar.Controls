@@ -1,6 +1,5 @@
 ﻿using System.Management;
 using System.Windows;
-using System.Windows.Input;
 
 namespace Mar.Controls.Tool;
 
@@ -17,6 +16,11 @@ public partial class ConsoleWindow : Window
 
         var customWriter = new T2TextWriter(BlockConsole); // 替换为你的界面控件
         Console.SetOut(customWriter);
+
+        BlockConsole.TextChanged += (_, _) =>
+        {
+            if (!IsMouseOver) ScrollViewer.ScrollToBottom();
+        };
     }
 
     public ConsoleWindow()
@@ -37,11 +41,6 @@ public partial class ConsoleWindow : Window
     {
         base.OnContentRendered(e);
         PrintSystemInfo();
-    }
-
-    private void UIElement_OnPreviewMouseMove(object sender, MouseEventArgs e)
-    {
-        ScrollViewer.ScrollToBottom();
     }
 
     #region Running Environment

@@ -6,13 +6,13 @@
         <ImplicitUsings>enable</ImplicitUsings>
         <Nullable>enable</Nullable>
         <LangVersion>11</LangVersion>
-        <PackageVersion>0.3.1</PackageVersion>
+        <PackageVersion>0.3.2</PackageVersion>
         <Title>Some useful usercontrol for WPF.</Title>
         <Authors>Zhong Wei</Authors>
         <Description>Some useful usercontrol for WPF.</Description>
         <RepositoryUrl>https://github.com/zhongwcool/Mar.Controls.git</RepositoryUrl>
         <PackageLicenseFile>LICENSE</PackageLicenseFile>
-        <PackageReleaseNotes>1. Add capacity support</PackageReleaseNotes>
+        <PackageReleaseNotes>1. Fix an isuue that user cannot scroll console text</PackageReleaseNotes>
         <PackageReadmeFile>README.md</PackageReadmeFile>
         <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
         <TargetFrameworks>net472;net6.0-windows;net7.0-windows;net481</TargetFrameworks>

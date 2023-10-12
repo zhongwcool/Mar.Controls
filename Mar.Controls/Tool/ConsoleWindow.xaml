@@ -6,7 +6,7 @@
         mc:Ignorable="d"
         Icon="../Resources/console.ico"
         Title="调试窗口" Height="450" Width="800">
-    <Grid PreviewMouseMove="UIElement_OnPreviewMouseMove" Background="#333333">
+    <Grid Background="#333333">
         <ScrollViewer x:Name="ScrollViewer" VerticalScrollBarVisibility="Auto">
             <TextBox x:Name="BlockConsole" Style="{x:Null}" IsReadOnly="True"
                      FontFamily="Lucida Console"

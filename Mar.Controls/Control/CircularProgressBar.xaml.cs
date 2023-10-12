@@ -83,6 +83,7 @@ public partial class CircularProgressBar
             if (bar?.Value != null)
             {
                 bar.DrawValue(bar.Value);
+                //Console.WriteLine(bar.Value);
             }
         }
     }
