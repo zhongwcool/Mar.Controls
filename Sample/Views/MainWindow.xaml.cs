@@ -21,7 +21,10 @@ public partial class MainWindow : Window
         {
             Dispatcher.Invoke(() =>
             {
-                var console = new ConsoleWindow();
+                var console = new ConsoleWindow(this)
+                {
+                    Capacity = 2000
+                };
                 console.Show();
             });
         });

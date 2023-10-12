@@ -9,7 +9,8 @@
     <Grid PreviewMouseMove="UIElement_OnPreviewMouseMove" Background="#333333">
         <ScrollViewer x:Name="ScrollViewer" VerticalScrollBarVisibility="Auto">
             <TextBox x:Name="BlockConsole" Style="{x:Null}" IsReadOnly="True"
-                     FontFamily="Lucida Console" MaxLength="1000"
+                     FontFamily="Lucida Console"
+                     MaxLength="{Binding Capacity, RelativeSource={RelativeSource AncestorType=Window}}"
                      Background="Transparent" Foreground="White" />
         </ScrollViewer>
     </Grid>

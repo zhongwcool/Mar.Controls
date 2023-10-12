@@ -8,13 +8,20 @@ public partial class ConsoleWindow : Window
 {
     /// <summary>
     ///     Console Window
-    ///     <para>控制台窗口</para>
+    /// <param name="owner">subscribe owner's closed event</param>
     /// </summary>
-    public ConsoleWindow()
+    public ConsoleWindow(Window owner)
     {
         InitializeComponent();
+        owner.Closed += Owner_WindowClosed;
+
         var customWriter = new T2TextWriter(BlockConsole); // 替换为你的界面控件
         Console.SetOut(customWriter);
+    }
+
+    private void Owner_WindowClosed(object sender, EventArgs e)
+    {
+        Close();
     }
 
     /// <inheritdoc cref="Window.OnContentRendered" />
@@ -65,6 +72,23 @@ public partial class ConsoleWindow : Window
         }
 
         Console.WriteLine();
+    }
+
+    #endregion
+
+    #region MyRegion
+
+    public static readonly DependencyProperty CapacityProperty =
+        DependencyProperty.Register(
+            nameof(Capacity),
+            typeof(int),
+            typeof(ConsoleWindow),
+            new PropertyMetadata(1000));
+
+    public int Capacity
+    {
+        get => (int)GetValue(CapacityProperty);
+        set => SetValue(CapacityProperty, value);
     }
 
     #endregion
