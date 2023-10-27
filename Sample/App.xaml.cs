@@ -8,7 +8,7 @@ using Serilog;
 
 namespace Sample;
 
-public partial class App : Application
+public partial class App
 {
     private readonly AppConfig _config = AppConfig.CreateInstance();
     private readonly string _file = Path.Combine("Log", "log.txt");

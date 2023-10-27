@@ -1,10 +1,15 @@
-﻿using System.Management;
+﻿using System.ComponentModel;
+using System.IO;
+using System.Management;
 using System.Windows;
 
 namespace Mar.Controls.Tool;
 
 public partial class ConsoleWindow : Window
 {
+    // 保存默认的控制台输出流
+    private readonly TextWriter _defaultWriter = Console.Out;
+
     /// <summary>
     ///     Console Window
     /// <param name="owner">subscribe owner's closed event</param>
@@ -14,6 +19,7 @@ public partial class ConsoleWindow : Window
         InitializeComponent();
         owner.Closed += Owner_WindowClosed;
 
+        _defaultWriter = Console.Out;
         var customWriter = new T2TextWriter(BlockConsole); // 替换为你的界面控件
         Console.SetOut(customWriter);
 
@@ -29,6 +35,13 @@ public partial class ConsoleWindow : Window
 
         var customWriter = new T2TextWriter(BlockConsole); // 替换为你的界面控件
         Console.SetOut(customWriter);
+    }
+
+    protected override void OnClosing(CancelEventArgs e)
+    {
+        base.OnClosing(e);
+        // 恢复输出到系统控制台
+        Console.SetOut(_defaultWriter);
     }
 
     private void Owner_WindowClosed(object sender, EventArgs e)
