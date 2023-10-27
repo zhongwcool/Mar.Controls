@@ -60,7 +60,21 @@ public partial class ConsoleWindow : Window
 
     private static void PrintSystemInfo()
     {
-        Console.WriteLine($"Windows Version: {Environment.OSVersion}");
+        var os = Environment.OSVersion;
+        var version = os.Version;
+        switch (version.Major)
+        {
+            case 10 when version.Build >= 19041:
+                Console.WriteLine($"Windows Version: Windows 10 {version.Build}");
+                break;
+            case 10 when version.Build >= 22000:
+                Console.WriteLine($"Windows Version: Windows 11 {version.Build}");
+                break;
+            default:
+                Console.WriteLine($"Windows Version: {Environment.OSVersion}");
+                break;
+        }
+
         Console.WriteLine($".NET SDK Version: {Environment.Version}");
 
         ManagementObjectSearcher searcher;

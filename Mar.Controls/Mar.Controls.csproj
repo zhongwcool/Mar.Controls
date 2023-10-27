@@ -7,9 +7,9 @@
         <Nullable>enable</Nullable>
         <LangVersion>11</LangVersion>
         <PackageVersion>0.3.4</PackageVersion>
-        <Title>Some useful usercontrol for WPF.</Title>
+        <Title>Some useful control for WPF.</Title>
         <Authors>Zhong Wei</Authors>
-        <Description>Some useful usercontrol for WPF.</Description>
+        <Description>Some useful control for WPF.</Description>
         <RepositoryUrl>https://github.com/zhongwcool/Mar.Controls.git</RepositoryUrl>
         <PackageLicenseFile>LICENSE</PackageLicenseFile>
         <PackageReleaseNotes>1. Restore output to system console.</PackageReleaseNotes>
