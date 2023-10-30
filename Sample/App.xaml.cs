@@ -1,4 +1,5 @@
-﻿using System.IO;
+﻿using System;
+using System.IO;
 using System.Windows;
 using System.Windows.Media;
 using ModernWpf;
@@ -48,7 +49,7 @@ public partial class App
                 rollOnFileSizeLimit: true,
                 outputTemplate: "{Timestamp:HH:mm:ss.fff} [{Level:u3}] {Message:l}{NewLine}{Exception}")
             .CreateLogger();
-        Log.Debug("hello serilog");
+        Log.Debug("hello {UserName}", Environment.UserName);
     }
 
     public static bool IsMultiThreaded { get; } = false;

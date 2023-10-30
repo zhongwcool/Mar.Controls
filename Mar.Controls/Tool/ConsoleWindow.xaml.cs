@@ -1,7 +1,7 @@
 ﻿using System.ComponentModel;
 using System.IO;
-using System.Management;
 using System.Windows;
+using Mar.Cheese;
 
 namespace Mar.Controls.Tool;
 
@@ -53,62 +53,8 @@ public partial class ConsoleWindow : Window
     protected override void OnContentRendered(EventArgs e)
     {
         base.OnContentRendered(e);
-        PrintSystemInfo();
+        SystemUtil.PrintSystemInfo();
     }
-
-    #region Running Environment
-
-    private static void PrintSystemInfo()
-    {
-        var os = Environment.OSVersion;
-        var version = os.Version;
-        switch (version.Major)
-        {
-            case 10 when version.Build >= 19041:
-                Console.WriteLine($"Windows Version: Windows 10 {version.Build}");
-                break;
-            case 10 when version.Build >= 22000:
-                Console.WriteLine($"Windows Version: Windows 11 {version.Build}");
-                break;
-            default:
-                Console.WriteLine($"Windows Version: {Environment.OSVersion}");
-                break;
-        }
-
-        Console.WriteLine($".NET SDK Version: {Environment.Version}");
-
-        ManagementObjectSearcher searcher;
-
-        // Query CPU
-        searcher = new ManagementObjectSearcher("select * from Win32_Processor");
-        foreach (var o in searcher.Get())
-        {
-            var share = (ManagementObject)o;
-            Console.WriteLine($"CPU: {share["Name"]}");
-        }
-
-        // Query Graphics Card
-        searcher = new ManagementObjectSearcher("select * from Win32_VideoController");
-        foreach (var o in searcher.Get())
-        {
-            var share = (ManagementObject)o;
-            Console.WriteLine("Graphics Card: " + share["Name"]);
-        }
-
-        // Query Memory
-        searcher = new ManagementObjectSearcher("select * from Win32_PhysicalMemory");
-        foreach (var o in searcher.Get())
-        {
-            var share = (ManagementObject)o;
-            var capacityBytes = (ulong)share["Capacity"];
-            var mem = (double)capacityBytes / 1024 / 1024 / 1024;
-            Console.WriteLine("Memory: " + mem + "GB");
-        }
-
-        Console.WriteLine();
-    }
-
-    #endregion
 
     #region MyRegion
 

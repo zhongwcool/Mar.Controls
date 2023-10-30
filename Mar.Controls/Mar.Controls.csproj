@@ -25,6 +25,7 @@
     </ItemGroup>
 
     <ItemGroup>
+        <PackageReference Include="Mar.Console" Version="0.5.1"/>
         <PackageReference Include="System.Management" Version="7.0.2"/>
     </ItemGroup>
 
