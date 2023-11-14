@@ -8,6 +8,11 @@
              d:DesignHeight="300" d:DesignWidth="300">
     <Viewbox>
         <Grid Width="34" Height="34">
+            <Path x:Name="PART_Back" Opacity="0.3"
+                  Data="M17,3 A14,14 0 0 1 17,31 "
+                  Stroke="{Binding ElementName=Root, Path=MagicStroke}" StrokeThickness="3"
+                  Height="34" Width="34"
+                  VerticalAlignment="Center" HorizontalAlignment="Center" />
             <Path x:Name="PART_Bar" 
                   Data="M17,3 A14,14 0 0 1 17,31 " 
                   Stroke="{Binding ElementName=Root, Path=MagicStroke}" StrokeThickness="3"

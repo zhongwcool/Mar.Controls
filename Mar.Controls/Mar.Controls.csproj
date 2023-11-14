@@ -5,14 +5,14 @@
         <GenerateDocumentationFile>true</GenerateDocumentationFile>
         <ImplicitUsings>enable</ImplicitUsings>
         <Nullable>enable</Nullable>
-        <LangVersion>11</LangVersion>
-        <PackageVersion>0.3.4</PackageVersion>
+        <LangVersion>12</LangVersion>
+        <PackageVersion>0.3.5</PackageVersion>
         <Title>Some useful control for WPF.</Title>
         <Authors>Zhong Wei</Authors>
         <Description>Some useful control for WPF.</Description>
         <RepositoryUrl>https://github.com/zhongwcool/Mar.Controls.git</RepositoryUrl>
         <PackageLicenseFile>LICENSE</PackageLicenseFile>
-        <PackageReleaseNotes>1. Restore output to system console.</PackageReleaseNotes>
+        <PackageReleaseNotes>1. 优化圆型进度的显示效果.</PackageReleaseNotes>
         <PackageReadmeFile>README.md</PackageReadmeFile>
         <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
         <TargetFrameworks>net472;net6.0-windows;net7.0-windows;net481</TargetFrameworks>
