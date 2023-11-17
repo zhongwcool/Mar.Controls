@@ -6,17 +6,19 @@
         <ImplicitUsings>enable</ImplicitUsings>
         <Nullable>enable</Nullable>
         <LangVersion>11</LangVersion>
-        <PackageVersion>0.3.6</PackageVersion>
+        <PackageVersion>0.3.7</PackageVersion>
         <Title>Some useful control for WPF.</Title>
         <Authors>Zhong Wei</Authors>
         <Description>Some useful control for WPF.</Description>
         <RepositoryUrl>https://github.com/zhongwcool/Mar.Controls.git</RepositoryUrl>
         <PackageLicenseFile>LICENSE</PackageLicenseFile>
-        <PackageReleaseNotes>1. 更新依赖库.</PackageReleaseNotes>
+        <PackageReleaseNotes>1. 为Console增加打印系统信息开关.</PackageReleaseNotes>
         <PackageReadmeFile>README.md</PackageReadmeFile>
         <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
         <TargetFrameworks>net472;net6.0-windows;net7.0-windows;net481</TargetFrameworks>
-        <AssemblyVersion>0.3.6</AssemblyVersion>
+        <AssemblyVersion>0.3.7</AssemblyVersion>
+        <FileVersion>0.3.7</FileVersion>
+        <NeutralLanguage>zh-Hans-CN</NeutralLanguage>
     </PropertyGroup>
 
     <ItemGroup>
