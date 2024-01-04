@@ -53,27 +53,34 @@ public partial class ConsoleWindow : Window
     protected override void OnContentRendered(EventArgs e)
     {
         base.OnContentRendered(e);
-        if (PrintEnv) SystemUtil.PrintSystemInfo();
+        if (PrintHello) SystemUtil.PrintSystemInfo();
     }
 
     #region MyRegion
 
-    public static readonly DependencyProperty CapacityProperty =
+    private static readonly DependencyProperty CapacityProperty =
         DependencyProperty.Register(nameof(Capacity), typeof(int), typeof(ConsoleWindow), new PropertyMetadata(1000));
 
+    /// <summary>
+    ///     Max content size of console
+    /// </summary>
     public int Capacity
     {
         get => (int)GetValue(CapacityProperty);
         set => SetValue(CapacityProperty, value);
     }
 
-    public static readonly DependencyProperty PrintEnvProperty =
-        DependencyProperty.Register(nameof(PrintEnv), typeof(bool), typeof(ConsoleWindow), new PropertyMetadata(true));
+    private static readonly DependencyProperty PrintHelloProperty =
+        DependencyProperty.Register(nameof(PrintHello), typeof(bool), typeof(ConsoleWindow),
+            new PropertyMetadata(true));
 
-    public bool PrintEnv
+    /// <summary>
+    ///     Print system info when window loaded
+    /// </summary>
+    public bool PrintHello
     {
-        get => (bool)GetValue(PrintEnvProperty);
-        set => SetValue(PrintEnvProperty, value);
+        get => (bool)GetValue(PrintHelloProperty);
+        set => SetValue(PrintHelloProperty, value);
     }
 
     #endregion

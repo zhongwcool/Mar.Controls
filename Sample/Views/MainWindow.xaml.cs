@@ -24,7 +24,7 @@ public partial class MainWindow : Window
                 var console = new ConsoleWindow(this)
                 {
                     Capacity = 2000,
-                    PrintEnv = true
+                    PrintHello = true
                 };
                 console.Show();
             });
