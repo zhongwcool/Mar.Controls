@@ -40,6 +40,7 @@
                 <ui:XamlControlsResources />
                 
                 <!-- Other merged dictionaries here -->
+                <ResourceDictionary Source="pack://application:,,,/Mar.Controls;component/Themes/Generic.xaml" />
             </ResourceDictionary.MergedDictionaries>
             <!-- Other app resources here -->
             <Thickness x:Key="ControlPageContentMargin">24,24,24,20</Thickness>

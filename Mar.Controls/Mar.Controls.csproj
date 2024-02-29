@@ -6,18 +6,18 @@
         <ImplicitUsings>enable</ImplicitUsings>
         <Nullable>disable</Nullable>
         <LangVersion>12</LangVersion>
-        <PackageVersion>0.3.8</PackageVersion>
+        <PackageVersion>0.4.0</PackageVersion>
         <Title>Some useful control for WPF.</Title>
         <Authors>Zhong Wei</Authors>
         <Description>Some useful control for WPF.</Description>
         <RepositoryUrl>https://github.com/zhongwcool/Mar.Controls.git</RepositoryUrl>
         <PackageLicenseFile>LICENSE</PackageLicenseFile>
-        <PackageReleaseNotes>1. 增加PrintHello开关（EN：Add option PrintHello）</PackageReleaseNotes>
+        <PackageReleaseNotes>1. 增加Watermark组件（EN：Add Watermark）</PackageReleaseNotes>
         <PackageReadmeFile>README.md</PackageReadmeFile>
         <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
         <TargetFrameworks>net6.0-windows;net7.0-windows;net472;net481;net8.0-windows</TargetFrameworks>
-        <AssemblyVersion>0.3.8</AssemblyVersion>
-        <FileVersion>0.3.8</FileVersion>
+        <AssemblyVersion>0.4.0</AssemblyVersion>
+        <FileVersion>0.4.0</FileVersion>
         <NeutralLanguage>zh-Hans-CN</NeutralLanguage>
     </PropertyGroup>
 
@@ -35,6 +35,14 @@
     <ItemGroup>
         <None Remove="Resources\console.ico"/>
         <Resource Include="Resources\console.ico"/>
+    </ItemGroup>
+
+    <ItemGroup>
+        <Page Update="Themes\Generic.xaml">
+            <Generator>MSBuild:Compile</Generator>
+            <XamlRuntime>Wpf</XamlRuntime>
+            <SubType>Designer</SubType>
+        </Page>
     </ItemGroup>
 
 </Project>

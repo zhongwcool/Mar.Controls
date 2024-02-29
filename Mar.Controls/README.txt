@@ -13,9 +13,35 @@ Don't forget to add a percent value resources in ViewModel:
         <mar:CircularProgressBar Value="{Binding Percent}" />
         ...
     </Grid>
+
+### 2. 水印
+
+在App.xaml中引用资源字典：
+
+<Application.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                
+                <!-- Other merged dictionaries here -->
+                <ResourceDictionary Source="pack://application:,,,/Mar.Controls;component/Themes/Generic.xaml" />
+            
+            </ResourceDictionary.MergedDictionaries>
+            <!-- Other app resources here -->
+
+        </ResourceDictionary>
+    </Application.Resources>
+
+在布局文件中使用：
+
+    <Grid>
+        ...
+        <mar:Watermark Mark="Mar.Controls" FontSize="30" Angle="45" MarkMargin="10" MarkBrush="{DynamicResource SystemAccentColorLight3Brush}">
+            <Border BorderThickness="1" CornerRadius="4" />
+        </mar:Watermark>
+        ...
+    </Grid>    
     
-    
-### 2. ConsoleWindow
+### 3. ConsoleWindow
 
 ![](https://raw.githubusercontent.com/zhongwcool/Mar.Controls/main/Assets/imf5dl4qxE.gif)
 

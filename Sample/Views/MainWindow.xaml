@@ -6,6 +6,7 @@
         xmlns:ui="http://schemas.modernwpf.com/2019"
         xmlns:vm="clr-namespace:Sample.ViewModels"
         xmlns:views="clr-namespace:Sample.Views"
+        xmlns:controls="clr-namespace:Mar.Controls;assembly=Mar.Controls"
         mc:Ignorable="d"
         d:DataContext="{d:DesignInstance vm:MainViewModel, IsDesignTimeCreatable=True}"
         ui:ThemeManager.IsThemeAware="True"
@@ -29,6 +30,11 @@
                               HorizontalAlignment="Right"
                               Margin="0,0,-420,0"
                               Panel.ZIndex="2" />
+
+        <controls:Watermark Mark="Mar.Controls" FontSize="30" Angle="45" MarkMargin="10"
+                            MarkBrush="{DynamicResource SystemAccentColorLight3Brush}">
+            <Border BorderThickness="1" CornerRadius="4" />
+        </controls:Watermark>
         
         <Grid>
             <Grid.RowDefinitions>
