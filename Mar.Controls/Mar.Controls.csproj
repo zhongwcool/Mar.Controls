@@ -6,29 +6,28 @@
         <ImplicitUsings>enable</ImplicitUsings>
         <Nullable>disable</Nullable>
         <LangVersion>12</LangVersion>
-        <PackageVersion>0.4.0</PackageVersion>
+        <PackageVersion>0.4.1-pre1</PackageVersion>
         <Title>Some useful control for WPF.</Title>
         <Authors>Zhong Wei</Authors>
         <Description>Some useful control for WPF.</Description>
         <RepositoryUrl>https://github.com/zhongwcool/Mar.Controls.git</RepositoryUrl>
-        <PackageLicenseFile>LICENSE</PackageLicenseFile>
-        <PackageReleaseNotes>1. 增加Watermark组件（EN：Add Watermark）</PackageReleaseNotes>
+        <PackageLicenseExpression>MIT</PackageLicenseExpression>
+        <PackageReleaseNotes>1. 测试TargetFramework最小兼容</PackageReleaseNotes>
         <PackageReadmeFile>README.md</PackageReadmeFile>
         <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
-        <TargetFrameworks>net6.0-windows;net7.0-windows;net472;net481;net8.0-windows</TargetFrameworks>
-        <AssemblyVersion>0.4.0</AssemblyVersion>
-        <FileVersion>0.4.0</FileVersion>
+        <AssemblyVersion>0.4.1</AssemblyVersion>
+        <FileVersion>0.4.1</FileVersion>
         <NeutralLanguage>zh-Hans-CN</NeutralLanguage>
+        <TargetFramework>net462</TargetFramework>
+        <PackageIcon>ico_nuget.png</PackageIcon>
     </PropertyGroup>
 
     <ItemGroup>
-        <None Include="LICENSE" Pack="true" PackagePath=""/>
-        <None Include="README.md" Pack="true" PackagePath=""/>
         <None Include="README.txt" Pack="true" PackagePath=""/>
     </ItemGroup>
 
     <ItemGroup>
-        <PackageReference Include="Mar.Console" Version="0.6.3"/>
+        <PackageReference Include="Mar.Console" Version="0.6.5"/>
         <PackageReference Include="System.Management" Version="8.0.0"/>
     </ItemGroup>
 
@@ -43,6 +42,15 @@
             <XamlRuntime>Wpf</XamlRuntime>
             <SubType>Designer</SubType>
         </Page>
+    </ItemGroup>
+
+    <ItemGroup>
+        <None Include="..\README.md" Pack="true" PackagePath="">
+            <Link>Properties\README.md</Link>
+        </None>
+        <None Include="..\ico_nuget.png" Pack="true" PackagePath="">
+            <Link>Properties\ico_nuget.png</Link>
+        </None>
     </ItemGroup>
 
 </Project>
