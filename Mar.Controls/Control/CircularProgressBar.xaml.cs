@@ -20,19 +20,53 @@ public partial class CircularProgressBar
     #region MagicStroke
 
     /// <summary>
-    /// set accent color of CircularProgressBar,it don't follow system if MagicStroke has been set 
+    /// set accent color of CircularProgressBar,it doesn't follow system if MagicStroke has been set 
     /// </summary>
-    public Brush MagicStroke
+    public Brush Stroke
     {
-        get => (Brush)GetValue(MagicStrokeProperty);
-        set => SetValue(MagicStrokeProperty, value);
+        get => (Brush)GetValue(StrokeProperty);
+        set => SetValue(StrokeProperty, value);
     }
 
-    private static readonly DependencyProperty MagicStrokeProperty = DependencyProperty.Register(
-        nameof(MagicStroke),
+    private static readonly DependencyProperty StrokeProperty = DependencyProperty.Register(
+        nameof(Stroke),
         typeof(Brush),
         typeof(CircularProgressBar),
         new PropertyMetadata(new SolidColorBrush(Colors.Black)));
+
+    /// <summary>
+    /// set Opacity of CircularProgressBar to reduce the brightness
+    /// </summary>
+    public float Magic
+    {
+        get => (float)GetValue(MagicProperty);
+        set
+        {
+            switch (value)
+            {
+                case < 0.4f:
+                    SetValue(MagicProperty, 0.3f);
+                    break;
+                case > 1.0f:
+                    SetValue(MagicProperty, 1.0f);
+                    break;
+                default:
+                    SetValue(MagicProperty, value);
+                    break;
+            }
+        }
+    }
+
+    private static readonly DependencyProperty MagicProperty = DependencyProperty.Register(
+        nameof(Magic),
+        typeof(float),
+        typeof(CircularProgressBar),
+        new PropertyMetadata(1.0f, OnMagicChanged));
+
+    private static void OnMagicChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
+    {
+        //输出变化信息
+    }
 
     #endregion
 

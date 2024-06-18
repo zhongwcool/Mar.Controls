@@ -16,14 +16,14 @@
 
         <UniformGrid Columns="2" Grid.Row="0">
             <mar:CircularProgressBar Value="{Binding Percent}"
-                                     MagicStroke="{DynamicResource SystemControlForegroundAccentBrush}"
+                                     Stroke="{DynamicResource SystemControlForegroundAccentBrush}"
                                      x:Name="ProcessBar0" />
             <mar:CircularProgressBar Value="{Binding Percent}"
-                                     MagicStroke="{DynamicResource SystemControlForegroundAccentBrush}" />
+                                     Stroke="{DynamicResource SystemControlForegroundAccentBrush}" />
             <mar:CircularProgressBar Value="{Binding Percent}"
-                                     MagicStroke="{DynamicResource SystemControlForegroundAccentBrush}" />
+                                     Stroke="{DynamicResource SystemControlForegroundAccentBrush}" />
             <mar:CircularProgressBar Value="{Binding Percent}"
-                                     MagicStroke="{DynamicResource SystemControlForegroundAccentBrush}" />
+                                     Stroke="{DynamicResource SystemControlForegroundAccentBrush}" />
         </UniformGrid>
 
         <WrapPanel HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Row="1">

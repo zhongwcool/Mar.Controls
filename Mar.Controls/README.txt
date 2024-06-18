@@ -1,6 +1,6 @@
 # Mar.Controls
 
-Thanks for installing the Mar.Controls NuGet package!
+Hope Mar.Controls can help you :-)
 
 ### 1. CircularProgressBar
 
