@@ -24,6 +24,7 @@ public partial class ConsoleWindow : Window
         _owner = owner;
         _owner.Closed += Owner_WindowClosed;
         _owner.LocationChanged += Owner_LocationChanged;
+        UpdatePosition(_owner.Left + _owner.ActualWidth, _owner.Top);
 
         _defaultWriter = Console.Out;
         var customWriter = new T2TextWriter(BlockConsole); // 替换为你的界面控件
