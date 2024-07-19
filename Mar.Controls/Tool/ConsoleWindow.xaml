@@ -5,7 +5,7 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         mc:Ignorable="d"
         Icon="../Resources/console.ico"
-        Title="调试窗口" Height="450" Width="800">
+        Title="调试窗口" Height="450" Width="600">
     <Grid Background="#333333">
         <ScrollViewer x:Name="ScrollViewer" VerticalScrollBarVisibility="Auto">
             <TextBox x:Name="BlockConsole" Style="{x:Null}" IsReadOnly="True"

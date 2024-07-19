@@ -11,7 +11,7 @@
         d:DataContext="{d:DesignInstance vm:MainViewModel, IsDesignTimeCreatable=True}"
         ui:ThemeManager.IsThemeAware="True"
         ui:WindowHelper.UseModernWindowStyle="True"
-        Title="Mar.Controls Sample" Height="720" Width="1080">
+        Title="Mar.Controls Sample" Height="400" Width="680">
     <Window.Resources>
         <!-- Opening -->
         <Storyboard x:Key="OpenMenu">
@@ -35,13 +35,13 @@
                             MarkBrush="{DynamicResource SystemAccentColorLight3Brush}">
             <Border BorderThickness="1" CornerRadius="4" />
         </controls:Watermark>
-        
+
         <Grid>
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto" />
                 <RowDefinition Height="*" />
             </Grid.RowDefinitions>
-            
+
             <!-- 命令栏 -->
             <Grid Grid.Row="0">
                 <Grid.ColumnDefinitions>
@@ -53,8 +53,8 @@
                 <Menu Grid.Column="0">
                     <MenuItem Header="Theme" />
                 </Menu>
-                
-                <Button Content="别点我" Click="BtnTest_OnClick" Grid.Column="1"/>
+
+                <Button Content="别点我" Click="BtnTest_OnClick" Grid.Column="1" />
 
                 <ui:CommandBar
                     Margin="0,0,12,0"
@@ -68,7 +68,7 @@
                     </ui:AppBarButton>
                 </ui:CommandBar>
             </Grid>
-            
+
             <!-- Content -->
             <views:MainContent Grid.Row="1" />
         </Grid>
