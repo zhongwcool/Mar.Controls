@@ -66,6 +66,7 @@ public class MainViewModel : ObservableObject
         set
         {
             SetProperty(ref _percent, value);
+            Log.Debug("{Percent}", _percent);
             CommandStart?.NotifyCanExecuteChanged();
         }
     }

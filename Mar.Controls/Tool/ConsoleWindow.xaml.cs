@@ -30,10 +30,7 @@ public partial class ConsoleWindow : Window
         var customWriter = new T2TextWriter(BlockConsole); // 替换为你的界面控件
         Console.SetOut(customWriter);
 
-        BlockConsole.TextChanged += (_, _) =>
-        {
-            if (!IsMouseOver) ScrollViewer.ScrollToBottom();
-        };
+        BlockConsole.TextChanged += (_, _) => { ScrollViewer.ScrollToBottom(); };
 
         LocationChanged += Self_OnLocationChanged;
     }
@@ -132,4 +129,12 @@ public partial class ConsoleWindow : Window
     }
 
     #endregion
+
+    private bool _autoScroll = true; // 控制自动滚动
+
+    private void ClearTextBlock_Click(object sender, RoutedEventArgs e)
+    {
+        // 清除TextBox的内容
+        BlockConsole.Clear();
+    }
 }

@@ -11,7 +11,13 @@
             <TextBox x:Name="BlockConsole" Style="{x:Null}" IsReadOnly="True"
                      FontFamily="Lucida Console"
                      MaxLength="{Binding Capacity, RelativeSource={RelativeSource AncestorType=Window}}"
-                     Background="Transparent" Foreground="White" />
+                     Background="Transparent" Foreground="White">
+                <TextBox.ContextMenu>
+                    <ContextMenu>
+                        <MenuItem Header="清除窗口" Click="ClearTextBlock_Click" />
+                    </ContextMenu>
+                </TextBox.ContextMenu>
+            </TextBox>
         </ScrollViewer>
     </Grid>
 </Window>
