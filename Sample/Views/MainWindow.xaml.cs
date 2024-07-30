@@ -17,18 +17,7 @@ public partial class MainWindow : Window
         InitializeComponent();
         DataContext = MainViewModel.CreateInstance();
 
-        Task.Delay(500).ContinueWith(_ =>
-        {
-            Dispatcher.Invoke(() =>
-            {
-                var console = new ConsoleWindow(this)
-                {
-                    Capacity = 2000,
-                    PrintHello = true
-                };
-                console.Show();
-            });
-        });
+        Task.Delay(500).ContinueWith(_ => { Dispatcher.Invoke(OpenDebugWindow); });
     }
 
     private void Window_MouseDown(object sender, MouseButtonEventArgs e)
@@ -63,4 +52,29 @@ public partial class MainWindow : Window
             }
         });
     }
+
+    private void MenuConsole_OnClick(object sender, RoutedEventArgs e)
+    {
+        OpenDebugWindow();
+    }
+
+    private void OpenDebugWindow()
+    {
+        if (_consoleWindow is not { IsLoaded: true })
+        {
+            _consoleWindow = new ConsoleWindow(this)
+            {
+                Capacity = 8000,
+                PrintHello = true,
+                Height = ActualHeight + 7
+            };
+            _consoleWindow.Show();
+        }
+        else
+        {
+            _consoleWindow.Focus();
+        }
+    }
+
+    private ConsoleWindow _consoleWindow;
 }

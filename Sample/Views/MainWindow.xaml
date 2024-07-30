@@ -51,7 +51,7 @@
                 </Grid.ColumnDefinitions>
 
                 <Menu Grid.Column="0">
-                    <MenuItem Header="Theme" />
+                    <MenuItem Header="打开调试" Click="MenuConsole_OnClick" />
                 </Menu>
 
                 <Button Content="别点我" Click="BtnTest_OnClick" Grid.Column="1" />

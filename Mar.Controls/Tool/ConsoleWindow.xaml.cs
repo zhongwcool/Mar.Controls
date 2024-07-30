@@ -5,6 +5,7 @@ using Mar.Cheese;
 
 namespace Mar.Controls.Tool;
 
+/// <inheritdoc cref="System.Windows.Window" />
 public partial class ConsoleWindow : Window
 {
     // 保存默认的控制台输出流
@@ -73,6 +74,7 @@ public partial class ConsoleWindow : Window
         Top = newTop;
     }
 
+    /// <inheritdoc />
     public ConsoleWindow()
     {
         InitializeComponent();
@@ -87,6 +89,12 @@ public partial class ConsoleWindow : Window
         base.OnClosing(e);
         // 恢复输出到系统控制台
         Console.SetOut(_defaultWriter);
+    }
+
+    private void ClearTextBlock_Click(object sender, RoutedEventArgs e)
+    {
+        // 清除TextBox的内容
+        BlockConsole.Clear();
     }
 
     private void Owner_WindowClosed(object sender, EventArgs e)
@@ -129,12 +137,4 @@ public partial class ConsoleWindow : Window
     }
 
     #endregion
-
-    private bool _autoScroll = true; // 控制自动滚动
-
-    private void ClearTextBlock_Click(object sender, RoutedEventArgs e)
-    {
-        // 清除TextBox的内容
-        BlockConsole.Clear();
-    }
 }
