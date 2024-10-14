@@ -6,17 +6,17 @@
         <ImplicitUsings>enable</ImplicitUsings>
         <Nullable>disable</Nullable>
         <LangVersion>12</LangVersion>
-        <PackageVersion>0.5.0</PackageVersion>
+        <PackageVersion>0.5.1</PackageVersion>
         <Title>Some useful control for WPF.</Title>
         <Authors>Zhong Wei</Authors>
         <Description>Some useful control for WPF.</Description>
         <RepositoryUrl>https://github.com/zhongwcool/Mar.Controls.git</RepositoryUrl>
         <PackageLicenseExpression>MIT</PackageLicenseExpression>
-        <PackageReleaseNotes>1.增加清除屏幕选项</PackageReleaseNotes>
+        <PackageReleaseNotes>1.调试窗口改为单例模式</PackageReleaseNotes>
         <PackageReadmeFile>README.md</PackageReadmeFile>
         <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
-        <AssemblyVersion>0.5.0</AssemblyVersion>
-        <FileVersion>0.5.0</FileVersion>
+        <AssemblyVersion>0.5.1</AssemblyVersion>
+        <FileVersion>0.5.1</FileVersion>
         <NeutralLanguage>zh-Hans-CN</NeutralLanguage>
         <PackageIcon>ico_nuget.png</PackageIcon>
         <TargetFrameworks>net6.0-windows;net8.0-windows;net462;net472;net481</TargetFrameworks>
@@ -27,7 +27,7 @@
     </ItemGroup>
 
     <ItemGroup>
-        <PackageReference Include="Mar.Console" Version="0.6.8"/>
+        <PackageReference Include="Mar.Console" Version="0.8.0"/>
         <PackageReference Include="System.Management" Version="8.0.0"/>
     </ItemGroup>
 

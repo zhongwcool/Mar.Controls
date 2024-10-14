@@ -8,6 +8,17 @@ namespace Mar.Controls.Tool;
 /// <inheritdoc cref="System.Windows.Window" />
 public partial class ConsoleWindow : Window
 {
+    private static ConsoleWindow _instance;
+
+    // 静态方法，返回唯一的实例
+    public static ConsoleWindow GetInstance(Window owner)
+    {
+        if (_instance != null) return _instance;
+        _instance = new ConsoleWindow(owner);
+        _instance.Closed += (s, e) => _instance = null;
+        return _instance;
+    }
+
     // 保存默认的控制台输出流
     private readonly TextWriter _defaultWriter = Console.Out;
 
@@ -19,7 +30,7 @@ public partial class ConsoleWindow : Window
     ///     Console Window
     /// <param name="owner">subscribe owner's closed event</param>
     /// </summary>
-    public ConsoleWindow(Window owner)
+    private ConsoleWindow(Window owner)
     {
         InitializeComponent();
         _owner = owner;
@@ -106,7 +117,7 @@ public partial class ConsoleWindow : Window
     protected override void OnContentRendered(EventArgs e)
     {
         base.OnContentRendered(e);
-        if (PrintHello) SystemUtil.PrintSystemInfo();
+        if (PrintHello) SystemUtil.PrintSystemInfoAsync();
     }
 
     #region MyRegion

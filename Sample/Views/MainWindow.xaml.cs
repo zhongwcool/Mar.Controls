@@ -60,21 +60,10 @@ public partial class MainWindow : Window
 
     private void OpenDebugWindow()
     {
-        if (_consoleWindow is not { IsLoaded: true })
-        {
-            _consoleWindow = new ConsoleWindow(this)
-            {
-                Capacity = 8000,
-                PrintHello = true,
-                Height = ActualHeight + 7
-            };
-            _consoleWindow.Show();
-        }
-        else
-        {
-            _consoleWindow.Focus();
-        }
+        var console = ConsoleWindow.GetInstance(this);
+        console.Capacity = 8000;
+        console.PrintHello = true;
+        console.Height = ActualHeight + 7;
+        console.Show();
     }
-
-    private ConsoleWindow _consoleWindow;
 }
