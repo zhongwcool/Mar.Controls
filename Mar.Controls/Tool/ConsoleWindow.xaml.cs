@@ -24,7 +24,11 @@ public partial class ConsoleWindow : Window
 
     // 这个变量表示窗体2是否正在跟随窗体1
     private static bool _shouldFollow = true;
+
     private readonly Window _owner;
+
+    // 添加变量跟踪粘连位置
+    private bool _isLeftSide = false;
 
     /// <summary>
     ///     Console Window
@@ -36,6 +40,9 @@ public partial class ConsoleWindow : Window
         _owner = owner;
         _owner.Closed += Owner_WindowClosed;
         _owner.LocationChanged += Owner_LocationChanged;
+
+        // 默认在右侧显示
+        _isLeftSide = false;
         UpdatePosition(_owner.Left + _owner.ActualWidth, _owner.Top);
 
         _defaultWriter = Console.Out;
@@ -49,15 +56,24 @@ public partial class ConsoleWindow : Window
 
     private void Self_OnLocationChanged(object sender, EventArgs e)
     {
-        // 判断Window2的位置与Window1是否足够近，来确定是否“粘连”
+        // 判断Window2的位置与Window1是否足够近，来确定是否"粘连"
         const double distanceThreshold = 50.0; // 为距离阈值，小于这个距离将粘连
 
-        // 如果拖动Window2并靠近Window1，则粘连到Window1的旁边
+        // 检查是否应该粘连到右侧
         if (Math.Abs(Left - (_owner.Left + _owner.ActualWidth)) < distanceThreshold &&
             Math.Abs(Top - _owner.Top) < distanceThreshold)
         {
             UpdatePosition(_owner.Left + _owner.ActualWidth, _owner.Top);
-            _shouldFollow = true; // 重置为跟随状态
+            _shouldFollow = true;
+            _isLeftSide = false; // 设置为右侧粘连
+        }
+        // 检查是否应该粘连到左侧
+        else if (Math.Abs(Left + ActualWidth - _owner.Left) < distanceThreshold &&
+                 Math.Abs(Top - _owner.Top) < distanceThreshold)
+        {
+            UpdatePosition(_owner.Left - ActualWidth, _owner.Top);
+            _shouldFollow = true;
+            _isLeftSide = true; // 设置为左侧粘连
         }
         else
         {
@@ -68,8 +84,15 @@ public partial class ConsoleWindow : Window
     private void Owner_LocationChanged(object sender, EventArgs e)
     {
         // 只有当Window2允许跟随的时候，才更新Window2的位置
-        if (_shouldFollow)
+        if (!_shouldFollow) return;
+        if (_isLeftSide)
         {
+            // 左侧粘连
+            UpdatePosition(_owner.Left - ActualWidth, _owner.Top);
+        }
+        else
+        {
+            // 右侧粘连
             UpdatePosition(_owner.Left + _owner.ActualWidth, _owner.Top);
         }
     }

@@ -6,7 +6,8 @@
         xmlns:ui="http://schemas.modernwpf.com/2019"
         xmlns:vm="clr-namespace:Sample.ViewModels"
         xmlns:views="clr-namespace:Sample.Views"
-        xmlns:controls="clr-namespace:Mar.Controls;assembly=Mar.Controls"
+        xmlns:mar="clr-namespace:Mar.Controls;assembly=Mar.Controls"
+        xmlns:ct="clr-namespace:Mar.Controls.Control;assembly=Mar.Controls"
         mc:Ignorable="d"
         d:DataContext="{d:DesignInstance vm:MainViewModel, IsDesignTimeCreatable=True}"
         ui:ThemeManager.IsThemeAware="True"
@@ -31,10 +32,10 @@
                               Margin="0,0,-420,0"
                               Panel.ZIndex="2" />
 
-        <controls:Watermark Mark="Mar.Controls" FontSize="30" Angle="45" MarkMargin="10"
-                            MarkBrush="{DynamicResource SystemAccentColorLight3Brush}">
+        <mar:Watermark Mark="Mar.Controls" FontSize="30" Angle="45" MarkMargin="10"
+                       MarkBrush="{DynamicResource SystemAccentColorLight3Brush}">
             <Border BorderThickness="1" CornerRadius="4" />
-        </controls:Watermark>
+        </mar:Watermark>
 
         <Grid>
             <Grid.RowDefinitions>
@@ -54,7 +55,7 @@
                     <MenuItem Header="打开调试" Click="MenuConsole_OnClick" />
                 </Menu>
 
-                <Button Content="别点我" Click="BtnTest_OnClick" Grid.Column="1" />
+                <ct:ClickableTextBlock Text="别点我" Click="BtnTest_OnClick" Grid.Column="1" />
 
                 <ui:CommandBar
                     Margin="0,0,12,0"

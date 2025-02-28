@@ -4,16 +4,16 @@
         <OutputType>WinExe</OutputType>
         <Nullable>disable</Nullable>
         <UseWPF>true</UseWPF>
-        <LangVersion>12</LangVersion>
+        <LangVersion>13</LangVersion>
         <ApplicationIcon>Resources\8678198.ico</ApplicationIcon>
-        <TargetFramework>net8.0-windows</TargetFramework>
+        <TargetFramework>net9.0-windows</TargetFramework>
     </PropertyGroup>
 
     <ItemGroup>
-        <PackageReference Include="CommunityToolkit.Mvvm" Version="8.3.2"/>
+        <PackageReference Include="CommunityToolkit.Mvvm" Version="8.4.0"/>
         <PackageReference Include="ModernWpfUI" Version="0.9.6"/>
         <PackageReference Include="Newtonsoft.Json" Version="13.0.3"/>
-        <PackageReference Include="Serilog" Version="4.0.2"/>
+        <PackageReference Include="Serilog" Version="4.2.0"/>
         <PackageReference Include="Serilog.Sinks.Console" Version="6.0.0"/>
         <PackageReference Include="Serilog.Sinks.Debug" Version="3.0.0"/>
         <PackageReference Include="Serilog.Sinks.File" Version="6.0.0"/>
