@@ -8,15 +8,37 @@ namespace Mar.Controls.Tool;
 /// <inheritdoc cref="System.Windows.Window" />
 public partial class ConsoleWindow : Window
 {
-    private static ConsoleWindow _instance;
+    // 使用字典来管理多个实例，避免内存泄漏
+    private static readonly Dictionary<Window, ConsoleWindow> Instances = new();
+    private static readonly object LockObject = new object();
 
     // 静态方法，返回唯一的实例
     public static ConsoleWindow GetInstance(Window owner)
     {
-        if (_instance != null) return _instance;
-        _instance = new ConsoleWindow(owner);
-        _instance.Closed += (s, e) => _instance = null;
-        return _instance;
+        if (owner == null)
+            throw new ArgumentNullException(nameof(owner));
+
+        lock (LockObject)
+        {
+            if (Instances.TryGetValue(owner, out var existingInstance))
+            {
+                // 检查实例是否仍然有效
+                if (!existingInstance.IsDisposed)
+                {
+                    return existingInstance;
+                }
+                else
+                {
+                    // 清理无效实例
+                    Instances.Remove(owner);
+                }
+            }
+
+            // 创建新实例
+            var newInstance = new ConsoleWindow(owner);
+            Instances[owner] = newInstance;
+            return newInstance;
+        }
     }
 
     // 保存默认的控制台输出流
@@ -25,10 +47,17 @@ public partial class ConsoleWindow : Window
     // 这个变量表示窗体2是否正在跟随窗体1
     private static bool _shouldFollow = true;
 
-    private readonly Window _owner;
+    private readonly Window _owner = null!;
 
     // 添加变量跟踪粘连位置
     private bool _isLeftSide = false;
+
+    // 添加标志位来跟踪是否已释放
+
+    /// <summary>
+    /// 检查实例是否已释放
+    /// </summary>
+    private bool IsDisposed { get; set; } = false;
 
     /// <summary>
     ///     Console Window
@@ -37,7 +66,9 @@ public partial class ConsoleWindow : Window
     private ConsoleWindow(Window owner)
     {
         InitializeComponent();
-        _owner = owner;
+        _owner = owner ?? throw new ArgumentNullException(nameof(owner));
+        
+        // 订阅owner的事件
         _owner.Closed += Owner_WindowClosed;
         _owner.LocationChanged += Owner_LocationChanged;
 
@@ -52,9 +83,71 @@ public partial class ConsoleWindow : Window
         BlockConsole.TextChanged += (_, _) => { ScrollViewer.ScrollToBottom(); };
 
         LocationChanged += Self_OnLocationChanged;
+        
+        // 订阅自己的关闭事件
+        Closed += Self_Closed;
     }
 
-    private void Self_OnLocationChanged(object sender, EventArgs e)
+    private void Self_Closed(object? sender, EventArgs e)
+    {
+        CleanupInstance();
+    }
+
+    private void CleanupInstance()
+    {
+        if (IsDisposed) return;
+        
+        IsDisposed = true;
+        
+        // 取消事件订阅
+        _owner.Closed -= Owner_WindowClosed;
+        _owner.LocationChanged -= Owner_LocationChanged;
+
+        // 从静态字典中移除
+        lock (LockObject)
+        {
+            Instances.Remove(_owner);
+        }
+        
+        // 恢复控制台输出
+        try
+        {
+            Console.SetOut(_defaultWriter);
+        }
+        catch (Exception ex)
+        {
+            // 记录错误但不抛出异常
+            System.Diagnostics.Debug.WriteLine($"恢复控制台输出时出错: {ex.Message}");
+        }
+    }
+
+    /// <summary>
+    /// 清理所有实例（用于测试或特殊情况）
+    /// </summary>
+    public static void CleanupAllInstances()
+    {
+        lock (LockObject)
+        {
+            var instancesToClose = Instances.Values.ToList();
+            foreach (var instance in instancesToClose)
+            {
+                try
+                {
+                    if (!instance.IsDisposed)
+                    {
+                        instance.Close();
+                    }
+                }
+                catch (Exception ex)
+                {
+                    System.Diagnostics.Debug.WriteLine($"关闭ConsoleWindow实例时出错: {ex.Message}");
+                }
+            }
+            Instances.Clear();
+        }
+    }
+
+    private void Self_OnLocationChanged(object? sender, EventArgs e)
     {
         // 判断Window2的位置与Window1是否足够近，来确定是否"粘连"
         const double distanceThreshold = 50.0; // 为距离阈值，小于这个距离将粘连
@@ -81,7 +174,7 @@ public partial class ConsoleWindow : Window
         }
     }
 
-    private void Owner_LocationChanged(object sender, EventArgs e)
+    private void Owner_LocationChanged(object? sender, EventArgs? e)
     {
         // 只有当Window2允许跟随的时候，才更新Window2的位置
         if (!_shouldFollow) return;
@@ -121,8 +214,7 @@ public partial class ConsoleWindow : Window
     protected override void OnClosing(CancelEventArgs e)
     {
         base.OnClosing(e);
-        // 恢复输出到系统控制台
-        Console.SetOut(_defaultWriter);
+        CleanupInstance();
     }
 
     private void ClearTextBlock_Click(object sender, RoutedEventArgs e)
@@ -131,8 +223,9 @@ public partial class ConsoleWindow : Window
         BlockConsole.Clear();
     }
 
-    private void Owner_WindowClosed(object sender, EventArgs e)
+    private void Owner_WindowClosed(object? sender, EventArgs? e)
     {
+        CleanupInstance();
         Close();
     }
 

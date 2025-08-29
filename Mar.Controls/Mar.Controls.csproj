@@ -4,15 +4,16 @@
         <UseWPF>true</UseWPF>
         <GenerateDocumentationFile>true</GenerateDocumentationFile>
         <ImplicitUsings>enable</ImplicitUsings>
-        <Nullable>disable</Nullable>
+        <Nullable>enable</Nullable>
         <LangVersion>13</LangVersion>
-        <PackageVersion>0.6.0</PackageVersion>
+        <PackageVersion>0.7.0</PackageVersion>
         <Title>Some useful control for WPF.</Title>
         <Authors>Zhong Wei</Authors>
         <Description>Some useful control for WPF.</Description>
         <RepositoryUrl>https://github.com/zhongwcool/Mar.Controls.git</RepositoryUrl>
         <PackageLicenseExpression>MIT</PackageLicenseExpression>
-        <PackageReleaseNotes>1.ConsoleWindow左侧"拖近粘连"功能</PackageReleaseNotes>
+        <PackageReleaseNotes>1.性能优化
+2.增强错误处理和容错能力</PackageReleaseNotes>
         <PackageReadmeFile>README.md</PackageReadmeFile>
         <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
         <AssemblyVersion>0.6.0</AssemblyVersion>
@@ -27,8 +28,8 @@
     </ItemGroup>
 
     <ItemGroup>
-        <PackageReference Include="Mar.Console" Version="0.8.1"/>
-        <PackageReference Include="System.Management" Version="9.0.2"/>
+        <PackageReference Include="Mar.Console" Version="0.9.0" />
+        <PackageReference Include="System.Management" Version="9.0.8" />
     </ItemGroup>
 
     <ItemGroup>

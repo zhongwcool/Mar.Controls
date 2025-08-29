@@ -22,9 +22,9 @@ public class Watermark : System.Windows.Controls.Control
 
     private const string ElementRoot = "PART_Root";
 
-    private Border _borderRoot;
+    private Border _borderRoot = null!;
 
-    private DrawingBrush _brush;
+    private DrawingBrush _brush = null!;
 
     public static readonly DependencyProperty AngleProperty = DependencyProperty.Register(
         nameof(Angle), typeof(double), typeof(Watermark),
@@ -107,7 +107,7 @@ public class Watermark : System.Windows.Controls.Control
 
     public override void OnApplyTemplate()
     {
-        _borderRoot = GetTemplateChild(ElementRoot) as Border;
+        _borderRoot = GetTemplateChild(ElementRoot) as Border ?? throw new InvalidOperationException($"Template part '{ElementRoot}' not found.");
     }
 
     private void EnsureBrush()
@@ -168,7 +168,7 @@ public class Watermark : System.Windows.Controls.Control
         RenderOptions.SetCachingHint(_brush, CachingHint.Cache);
 
         if (null == _borderRoot) return;
-        _borderRoot.Background = _brush;
+        _borderRoot!.Background = _brush;
     }
 
     protected override void OnRender(DrawingContext drawingContext)
