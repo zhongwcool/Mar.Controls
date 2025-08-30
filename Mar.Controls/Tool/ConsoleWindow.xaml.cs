@@ -13,7 +13,7 @@ public partial class ConsoleWindow : Window
     private static readonly object LockObject = new object();
 
     // 静态方法，返回唯一的实例
-    public static ConsoleWindow GetInstance(Window owner)
+    public static ConsoleWindow GetInstance(Window owner, bool showOnLeft = false, double spacing = 0.0)
     {
         if (owner == null)
             throw new ArgumentNullException(nameof(owner));
@@ -35,7 +35,7 @@ public partial class ConsoleWindow : Window
             }
 
             // 创建新实例
-            var newInstance = new ConsoleWindow(owner);
+            var newInstance = new ConsoleWindow(owner, showOnLeft, spacing);
             Instances[owner] = newInstance;
             return newInstance;
         }
@@ -51,6 +51,9 @@ public partial class ConsoleWindow : Window
 
     // 添加变量跟踪粘连位置
     private bool _isLeftSide = false;
+    
+    // 添加间距参数
+    private double _spacing = 0.0;
 
     // 添加标志位来跟踪是否已释放
 
@@ -62,19 +65,22 @@ public partial class ConsoleWindow : Window
     /// <summary>
     ///     Console Window
     /// <param name="owner">subscribe owner's closed event</param>
+    /// <param name="showOnLeft">是否在左侧显示</param>
+    /// <param name="spacing">窗口粘连的间距</param>
     /// </summary>
-    private ConsoleWindow(Window owner)
+    private ConsoleWindow(Window owner, bool showOnLeft = false, double spacing = 0.0)
     {
         InitializeComponent();
         _owner = owner ?? throw new ArgumentNullException(nameof(owner));
+        _spacing = spacing;
         
         // 订阅owner的事件
         _owner.Closed += Owner_WindowClosed;
         _owner.LocationChanged += Owner_LocationChanged;
 
-        // 默认在右侧显示
-        _isLeftSide = false;
-        UpdatePosition(_owner.Left + _owner.ActualWidth, _owner.Top);
+        // 设置显示位置
+        _isLeftSide = showOnLeft;
+        UpdateInitialPosition();
 
         _defaultWriter = Console.Out;
         var customWriter = new T2TextWriter(BlockConsole); // 替换为你的界面控件
@@ -86,6 +92,16 @@ public partial class ConsoleWindow : Window
         
         // 订阅自己的关闭事件
         Closed += Self_Closed;
+    }
+
+    /// <summary>根据左右位置和间距更新初始位置</summary>
+    private void UpdateInitialPosition()
+    {
+        var verticalBorderWidth = SystemParameters.ResizeFrameVerticalBorderWidth;
+        if (_isLeftSide)
+            UpdatePosition(_owner.Left - ActualWidth - _spacing - (_spacing == 0.0 ? verticalBorderWidth : 0.0), _owner.Top);
+        else
+            UpdatePosition(_owner.Left + _owner.ActualWidth + _spacing - (_spacing == 0.0 ? verticalBorderWidth : 0.0), _owner.Top);
     }
 
     private void Self_Closed(object? sender, EventArgs e)
@@ -149,22 +165,22 @@ public partial class ConsoleWindow : Window
 
     private void Self_OnLocationChanged(object? sender, EventArgs e)
     {
-        // 判断Window2的位置与Window1是否足够近，来确定是否"粘连"
-        const double distanceThreshold = 50.0; // 为距离阈值，小于这个距离将粘连
-
+        var verticalBorderWidth = SystemParameters.ResizeFrameVerticalBorderWidth;
+        var num = _spacing - (_spacing == 0.0 ? verticalBorderWidth : 0.0);
+        
         // 检查是否应该粘连到右侧
-        if (Math.Abs(Left - (_owner.Left + _owner.ActualWidth)) < distanceThreshold &&
-            Math.Abs(Top - _owner.Top) < distanceThreshold)
+        if (Math.Abs(Left - (_owner.Left + _owner.ActualWidth + num)) < 50.0 &&
+            Math.Abs(Top - _owner.Top) < 50.0)
         {
-            UpdatePosition(_owner.Left + _owner.ActualWidth, _owner.Top);
+            UpdatePosition(_owner.Left + _owner.ActualWidth + num, _owner.Top);
             _shouldFollow = true;
             _isLeftSide = false; // 设置为右侧粘连
         }
         // 检查是否应该粘连到左侧
-        else if (Math.Abs(Left + ActualWidth - _owner.Left) < distanceThreshold &&
-                 Math.Abs(Top - _owner.Top) < distanceThreshold)
+        else if (Math.Abs(Left + ActualWidth + num - _owner.Left) < 50.0 &&
+                 Math.Abs(Top - _owner.Top) < 50.0)
         {
-            UpdatePosition(_owner.Left - ActualWidth, _owner.Top);
+            UpdatePosition(_owner.Left - ActualWidth - num, _owner.Top);
             _shouldFollow = true;
             _isLeftSide = true; // 设置为左侧粘连
         }
@@ -178,15 +194,19 @@ public partial class ConsoleWindow : Window
     {
         // 只有当Window2允许跟随的时候，才更新Window2的位置
         if (!_shouldFollow) return;
+        
+        var verticalBorderWidth = SystemParameters.ResizeFrameVerticalBorderWidth;
+        var num = _spacing - (_spacing == 0.0 ? verticalBorderWidth : 0.0);
+        
         if (_isLeftSide)
         {
             // 左侧粘连
-            UpdatePosition(_owner.Left - ActualWidth, _owner.Top);
+            UpdatePosition(_owner.Left - ActualWidth - num, _owner.Top);
         }
         else
         {
             // 右侧粘连
-            UpdatePosition(_owner.Left + _owner.ActualWidth, _owner.Top);
+            UpdatePosition(_owner.Left + _owner.ActualWidth + num, _owner.Top);
         }
     }
 
@@ -233,6 +253,7 @@ public partial class ConsoleWindow : Window
     protected override void OnContentRendered(EventArgs e)
     {
         base.OnContentRendered(e);
+        UpdateInitialPosition();
         if (PrintHello) SystemUtil.PrintSystemInfoAsync();
     }
 

@@ -60,7 +60,7 @@ public partial class MainWindow : Window
 
     private void OpenDebugWindow()
     {
-        var console = ConsoleWindow.GetInstance(this);
+        var console = ConsoleWindow.GetInstance(this, true, 0);
         console.Capacity = 8000;
         console.PrintHello = true;
         console.Height = ActualHeight + 7;

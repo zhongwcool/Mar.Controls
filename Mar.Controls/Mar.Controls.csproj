@@ -6,14 +6,13 @@
         <ImplicitUsings>enable</ImplicitUsings>
         <Nullable>enable</Nullable>
         <LangVersion>13</LangVersion>
-        <PackageVersion>0.7.0</PackageVersion>
+        <PackageVersion>0.7.1</PackageVersion>
         <Title>Some useful control for WPF.</Title>
         <Authors>Zhong Wei</Authors>
         <Description>Some useful control for WPF.</Description>
         <RepositoryUrl>https://github.com/zhongwcool/Mar.Controls.git</RepositoryUrl>
         <PackageLicenseExpression>MIT</PackageLicenseExpression>
-        <PackageReleaseNotes>1.性能优化
-2.增强错误处理和容错能力</PackageReleaseNotes>
+        <PackageReleaseNotes>1恢复ConsoleWindow初始出现在Owner左侧</PackageReleaseNotes>
         <PackageReadmeFile>README.md</PackageReadmeFile>
         <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
         <AssemblyVersion>0.6.0</AssemblyVersion>
